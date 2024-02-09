@@ -1,0 +1,65 @@
+{% extends 'core/index.html' %}
+
+{% block title %}
+Statistics
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <canvas id="myChart"></canvas>
+        </div>
+        <div class="col-12">
+            <canvas id="myChart2"></canvas>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('myChart');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Talabalar', 'O\'qituvchilar', 'Ota-onalar', 'Sinflar', 'Fanlar'],
+            datasets: [{
+                label: 'Soni',
+                data: [{{ students_number }}, {{ teachers_number }}, {{ parents_number }}, {{ classes_count }}, {{ subjects_count }}],
+        borderWidth: 1
+        }]
+    },
+        options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+    });
+</script>
+<script>
+    const ctx2 = document.getElementById('myChart2');
+
+    new Chart(ctx2, {
+        type: 'doughnut',
+        data: {
+            labels: ['Talabalar', 'O\'qituvchilar', 'Ota-onalar', 'Sinflar', 'Fanlar'],
+            datasets: [{
+                label: 'Soni',
+                data: [{{ students_number }}, {{ teachers_number }}, {{ parents_number }}, {{ classes_count }}, {{ subjects_count }}],
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 205, 86)',
+                    'rgb(55, 45, 186)',
+                    'rgb(230, 145, 166)',
+                ],
+                hoverOffset: 4
+            }]
+        }});
+</script>
+{% endblock scripts %}

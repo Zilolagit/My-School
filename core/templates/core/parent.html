@@ -1,0 +1,23 @@
+{% extends 'core/index.html' %}
+
+{% block title %}
+    {{object.parent.name}}
+{% endblock title %}
+
+{% block content %}
+    <form action="." method="POST">
+        {% csrf_token %}
+        <div class="container py-4">
+            {{form.as_p}}
+            <div class="row">
+                <div class="col-6">
+                    <button type="submit" class="btn btn-success w-100">Save</button>
+                </div>
+                <div class="col-6">
+                    <a href="{% url 'students_list' %}" class="btn btn-warning w-100">Cancel</a>
+                </div>
+            </div>
+
+        </div>
+    </form>
+{% endblock content %}
